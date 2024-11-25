@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      #theme-toggle-icon{
+        margin-left: 30px;
+        margin-top: 30px;
+        border: 1px solid tan;
+        border-radius: 50%;
+      }
+      h2{
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dark Mode Toggle (same as before) -->
+    <div class="dark-mode-toggle d-flex align-items-center ms-3">
+      <img
+        src="./img/sun1.png"
+        id="theme-toggle-icon"
+        alt="Toggle Dark Mode"
+        class="toggle-icon"
+        onclick="toggleDarkMode()"
+        style="cursor: pointer"
+      />
+    </div>
+    <div class="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items" class="cart-items"></div>
+      <div id="cart-total">
+        <!-- You can add a total price section here -->
+      </div>
+    </div>
+    
+    <!-- <script src="./js/script.js"></script> -->
+    <script>
+      // Function to update the cart count
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+        if (cartCount) {
+          cartCount.textContent = cart.length; // Update the cart count in the UI
+        }
+      }
+
+      // Function to remove item from the cart and localStorage
+      function removeFromCart(productName) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        // Filter out the item from the cart array
+        cart = cart.filter((item) => item.name !== productName);
+        // Update the cart in localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Update cart count after removing an item
+        updateCartCount();
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get cart data from localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartContainer = document.getElementById("cart-items");
+
+        // Display all items in the cart
+        cart.forEach((item) => {
+          let cartItem = document.createElement("div");
+          cartItem.classList.add("cart-item");
+
+          cartItem.innerHTML = `
+                    <div class="cart-item-card">
+                        <img src="${item.image}" class="product-image" alt="${item.name}" />
+                        <div class="cart-item-details">
+                            <div class="product-name">${item.name}</div>
+                            <div class="product-price">$${item.price}</div>
+                            <button class="remove-from-cart-btn" data-name="${item.name}">Remove</button>
+                        </div>
+                    </div>
+                `;
+          cartContainer.appendChild(cartItem);
+        });
+
+        // Handle remove button click
+        const removeFromCartButtons = document.querySelectorAll(
+          ".remove-from-cart-btn"
+        );
+
+        removeFromCartButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            let productName = button.getAttribute("data-name");
+            removeFromCart(productName); // Remove from cart
+            button.closest(".cart-item").remove(); // Remove item from UI
+          });
+        });
+
+        updateCartCount(); // Initial update of the cart count
+      });
+
+      function toggleDarkMode() {
+  // Get the body element
+  const body = document.body;
+  // Toggle the dark-mode class on the body
+  body.classList.toggle("dark-mode");
+
+  // Update the toggle icon
+  const icon = document.getElementById("theme-toggle-icon");
+  if (body.classList.contains("dark-mode")) {
+    icon.src = "./img/moon.png"; // Change to moon image
+    // Save the dark mode preference in localStorage
+    localStorage.setItem("dark-mode", "enabled");
+  } else {
+    icon.src = "./img/sun1.png"; // Change to sun image
+    // Save the light mode preference in localStorage
+    localStorage.setItem("dark-mode", "disabled");
+  }
+
+  // Apply dark mode styles to specific elements
+  const navbarLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  navbarLinks.forEach((link) => {
+    link.classList.toggle("dark-mode");
+  });
+
+  const searchInput = document.querySelector(".search-input");
+  searchInput.classList.toggle("dark-mode");
+
+  const signupButton = document.querySelector(".create-signup-btn");
+  signupButton.classList.toggle("dark-mode");
+}
+
+// On page load, check if dark mode is enabled
+window.onload = () => {
+  // Check if dark mode is saved in localStorage
+  if (localStorage.getItem("dark-mode") === "enabled") {
+    // Apply dark mode class if dark mode is enabled
+    document.body.classList.add("dark-mode");
+
+    // Change the icon to the moon
+    const icon = document.getElementById("theme-toggle-icon");
+    icon.src = "./img/moon.png";
+
+    // Apply dark mode styles to specific elements
+    const navbarLinks = document.querySelectorAll(".navbar-nav .nav-link");
+    navbarLinks.forEach((link) => {
+      link.classList.add("dark-mode");
+    });
+
+    const searchInput = document.querySelector(".search-input");
+    searchInput.classList.add("dark-mode");
+
+    const signupButton = document.querySelector(".create-signup-btn");
+    signupButton.classList.add("dark-mode");
+  }
+};
+
+
+    </script>
+  </body>
+</html>

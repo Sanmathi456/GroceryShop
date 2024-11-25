@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanmathi Mart</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="./img/grocery.jpg" class="logo" alt="Sanmathi Logo" />
+          <span class="martname">SANMATHI MART</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sidebar for category selection -->
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col-md-3">
+        <h5>Categories</h5>
+        <!-- Checkbox for Vegetables -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="vegCheckbox"
+            onclick="toggleCategory()"
+          />
+          <label class="form-check-label" for="vegCheckbox">
+            Vegetables
+          </label>
+        </div>
+        <!-- Checkbox for Fruits -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="fruitsCheckbox"
+            onclick="toggleCategory()"
+          />
+          <label class="form-check-label" for="fruitsCheckbox">
+            Fruits
+          </label>
+        </div>
+      </div>
+
+      <!-- Product display section -->
+      <div class="col-md-9">
+        <h2 class="text-center vegfrucol mb-4">Vegetables & Fruits</h2>
+        
+        <!-- All Products (both vegetables and fruits) -->
+        <div class="row" id="products">
+          <!-- Vegetable Products (Initially displayed) -->
+          <div class="col-md-3 product-card" id="apple">
+            <img src="./img/apple.jpg" class="product-image" alt="Apple" />
+            <div class="product-name">Apple</div>
+            <div class="product-price">$40.99</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="col-md-3 product-card" id="banana">
+            <img src="./img/banana.jpg" class="product-image" alt="Banana" />
+            <div class="product-name">Banana</div>
+            <div class="product-price">$30.99</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+
+          <!-- Fruit Products (Initially displayed) -->
+          <div class="col-md-3 product-card" id="carrot">
+            <img src="./img/carrot.jpg" class="product-image" alt="Carrot" />
+            <div class="product-name">Carrot</div>
+            <div class="product-price">$31.50</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+          <div class="col-md-3 product-card" id="broccoli">
+            <img src="./img/broccoli.jpg" class="product-image" alt="Broccoli" />
+            <div class="product-name">Broccoli</div>
+            <div class="product-price">$28.00</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to toggle the visibility of categories based on checkbox
+    function toggleCategory() {
+      var apple = document.getElementById("apple");
+      var banana = document.getElementById("banana");
+      var carrot = document.getElementById("carrot");
+      var broccoli = document.getElementById("broccoli");
+      
+      var checkboxVeg = document.getElementById("vegCheckbox");
+      var checkboxFruits = document.getElementById("fruitsCheckbox");
+
+      // Show or hide Vegetable items
+      if (checkboxVeg.checked) {
+        apple.style.display = "block";
+        banana.style.display = "block";
+      } else {
+        apple.style.display = "none";
+        banana.style.display = "none";
+      }
+
+      // Show or hide Fruit items
+      if (checkboxFruits.checked) {
+        carrot.style.display = "block";
+        broccoli.style.display = "block";
+      } else {
+        carrot.style.display = "none";
+        broccoli.style.display = "none";
+      }
+
+      // If no category is checked, show all products
+      if (!checkboxVeg.checked && !checkboxFruits.checked) {
+        apple.style.display = "block";
+        banana.style.display = "block";
+        carrot.style.display = "block";
+        broccoli.style.display = "block";
+      }
+    }
+
+    // Call toggleCategory function initially to show all products
+    window.onload = function() {
+      toggleCategory(); // Show all cards by default
+    };
+  </script>
+</body>
+</html>

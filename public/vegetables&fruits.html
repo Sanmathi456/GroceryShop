@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanmathi Mart</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="./img/grocery.jpg" class="logo" alt="Sanmathi Logo" />
+            <span class="martname">SANMATHI MART</span>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <div
+              class="d-flex flex-column flex-lg-row w-100 align-items-center"
+            >
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">`    
+                  <select
+                    class="form-select"
+                    id="category"
+                    onchange="redirectToPage()"
+                  >
+                    <option value="">Shop by category</option>
+                    <option value="vegetables&fruits.html" class="selecthover">
+                      Vegetables & Fruits
+                    </option>
+                    <option value="staples.html">Staples</option>
+                    <option value="snacks-namkeens.html">
+                      Snacks & Namkeens
+                    </option>
+                    <option value="beverages.html">Beverages</option>
+                    <option value="chilled-dairy.html">
+                      Chilled & Dairy Foods
+                    </option>
+                    <option value="ready-to-cook.html">Ready to Cook</option>
+                    <option value="ready-to-eat.html">Ready to Eat</option>
+                    <option value="baby-care.html">Baby Care</option>
+                    <option value="household-essentials.html">
+                      Household Essentials
+                    </option>
+                    <option value="cleaning-needs.html">Cleaning Needs</option>
+                    <option value="feminine-care.html">Feminine Care</option>
+                    <option value="personal-care.html">Personal Care</option>
+                    <option value="stationery.html">Stationery</option>
+                    <option value="skin-care.html">Skin Care</option>
+                    <option value="oral-care.html">Oral Care</option>
+                    <option value="mens-grooming.html">Men's Grooming</option>
+                    <option value="creams-lotions.html">
+                      Creams & Lotions
+                    </option>
+                  </select>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="deal.html">Deals</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="Newarrivals.html"
+                    >New Arrivals</a
+                  >
+                </li>
+              </ul>
+
+              <div class="search-bar">
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search for products..."
+                />
+                <div class="search-icon">
+                  <img src="./img/search.png" alt="Search" />
+                </div>
+              </div>
+
+              <div
+                class="icon-container d-flex align-items-center mt-2 mt-lg-0"
+              >
+                <a href="favourite.html" class="cart-icon">
+                  <img src="./img/heart.jpg" alt="Favorite Products" />
+                  <span class="cart-badge" id="fav-count">0</span>
+                </a>
+                <a href="cart.html" class="cart-icon">
+                  <img src="./img/cart.png" alt="Cart" />
+                  <span class="cart-badge" id="cart-count">0</span>
+                </a>
+                <div class="d-flex align-items-center">
+                  <img src="./img/profile.png" alt="Profile" />
+                  <a href="signup.html">
+                    <button class="create-signup-btn">Create Signup</button>
+                  </a>
+                </div>
+
+                <!-- Dark Mode Toggle (same as before) -->
+                <div class="dark-mode-toggle d-flex align-items-center ms-3">
+                  <img
+                    src="./img/sun1.png"
+                    id="theme-toggle-icon"
+                    alt="Toggle Dark Mode"
+                    class="toggle-icon"
+                    onclick="toggleDarkMode()"
+                    style="cursor: pointer"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+     <!-- Sidebar for category selection -->
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col-md-3">
+        <h5>Categories</h5>
+        <!-- Checkbox for Vegetables -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="vegCheckbox"
+            onclick="toggleCategory()"
+          />
+          <label class="form-check-label" for="vegCheckbox">
+            Vegetables
+          </label>
+        </div>
+        <!-- Checkbox for Fruits -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="fruitsCheckbox"
+            onclick="toggleCategory()"
+          />
+          <label class="form-check-label" for="fruitsCheckbox">
+            Fruits
+          </label>
+        </div>
+      </div>
+
+
+    <!-- Product Display Section (for Vegetables & Fruits) -->
+    <section class="container mt-5 pt-5">
+      <h2 class="text-center vegfrucol mb-4">Vegetables & Fruits</h2>
+      <div class="row" id="products">
+        <!-- Product Cards (example of 20 items) -->
+        <div class="col-md-3" id="apple">
+          <div class="product-card">
+            <img
+              src="./img/heart.jpg"
+              class="favorite-icon"
+              alt="Favorite"
+              onclick="toggleFavorite(0)"
+            />
+            <img src="./img/apple.jpg" class="product-image" alt="Apple" />
+            <div class="product-name">Apple</div>
+            <div class="product-price">$40.99</div>
+            <button class="add-to-cart-btn">Add to Cart< /button>
+          </div>
+        </div>
+        <div class="col-md-3" id="banana">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/banana.jpg" class="product-image" alt="Banana" />
+            <div class="product-name">Banana</div>
+            <div class="product-price">$30.99</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="col-md-3" id="carrot">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/carrot.jpg" class="product-image" alt="Carrot" />
+            <div class="product-name">Carrot</div>
+            <div class="product-price">$31.50</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="col-md-3" id="broccoli">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img
+              src="./img/broccoli.jpg"
+              class="product-image"
+              alt="Broccoli"
+            />
+            <div class="product-name">Broccoli</div>
+            <div class="product-price">$28.00</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="tomato">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/tomato.jpg" class="product-image" alt="Tomato" />
+            <div class="product-name">Tomato</div>
+            <div class="product-price">$61.20</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="potato">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/potato.jpg" class="product-image" alt="Potato" />
+            <div class="product-name">Potato</div>
+            <div class="product-price">$40.80</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="grapes">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/grapes.jpg" class="product-image" alt="Spinach" />
+            <div class="product-name">Grapes</div>
+            <div class="product-price">$51.60</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="cucumber">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img
+              src="./img/cucumber.jpg"
+              class="product-image"
+              alt="Cucumber"
+            />
+            <div class="product-name">Cucumber</div>
+            <div class="product-price">$12.75</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="orange">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/orange.jpg" class="product-image" alt="Orange" />
+            <div class="product-name">Orange</div>
+            <div class="product-price">$15.30</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="pine apple">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img
+              src="./img/pine apple.jpg"
+              class="product-image"
+              alt="Grapes"
+            />
+            <div class="product-name">pine apple</div>
+            <div class="product-price">$25.50</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="peach">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/peach.jpg" class="product-image" alt="Peach" />
+            <div class="product-name">Peach</div>
+            <div class="product-price">$29.00</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="lemon">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/lemon.jpg" class="product-image" alt="Lemon" />
+            <div class="product-name">Lemon</div>
+            <div class="product-price">$45.10</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="bell pepper">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img
+              src="./img/bell-pepper.jpg"
+              class="product-image"
+              alt="Bell Pepper"
+            />
+            <div class="product-name">Bell Pepper</div>
+            <div class="product-price">$16.80</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="ladies finger">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img
+              src="./img/ladies finger.jpg"
+              class="product-image"
+              alt="Zucchini"
+            />
+            <div class="product-name">Ladies finger</div>
+            <div class="product-price">$18.40</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="melon">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/melon.jpg" class="product-image" alt="Melon" />
+            <div class="product-name">Melon</div>
+            <div class="product-price">$32.00</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="avacado">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/avacado.jpg" class="product-image" alt="Avocado" />
+            <div class="product-name">Avocado</div>
+            <div class="product-price">$20.20</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/pear.jpg" class="product-image" alt="Pear" />
+            <div class="product-name">Pear</div>
+            <div class="product-price">$21.60</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="col-md-3" id="cherry">
+          <div class="product-card">
+            <img src="./img/heart.jpg" class="favorite-icon" alt="Favorite" />
+            <img src="./img/cherry.jpg" class="product-image" alt="Cherry" />
+            <div class="product-name">Cherry</div>
+            <div class="product-price">$38.50</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      function goToCart() {
+        window.location.href = "cart.html";
+      }
+    </script>
+     <script>
+      // Function to toggle the visibility of categories based on checkbox
+      function toggleCategory() {
+        var apple = document.getElementById("apple");
+        var banana = document.getElementById("banana");
+        var carrot = document.getElementById("carrot");
+        var broccoli = document.getElementById("broccoli");
+        var orange = document.getElementById("orange");
+        var pineapple = document.getElementById("pine apple");
+        var melon = document.getElementById("melon");
+        var cherry = document.getElementById("cherry");
+        var pear= document.getElementById("pear");
+        var avacado= document.getElementById("avacado");
+        var peach= document.getElementById("peach");
+        var tomato= document.getElementById("tomato");
+        var cucumber= document.getElementById("cucumber");
+        var lemon= document.getElementById("lemon");
+        var potato= document.getElementById("potato");
+        var bellpepper= document.getElementById("bellpepper");
+        var ladiesfinger= document.getElementById("ladies finger");
+        
+        var checkboxVeg = document.getElementById("vegCheckbox");
+        var checkboxFruits = document.getElementById("fruitsCheckbox");
+  
+        // Show or hide Vegetable items
+        if (checkboxVeg.checked) {
+          apple.style.display = "block";
+          banana.style.display = "block";
+        } else {
+          apple.style.display = "none";
+          banana.style.display = "none";
+        }
+  
+        // Show or hide Fruit items
+        if (checkboxFruits.checked) {
+          carrot.style.display = "block";
+          broccoli.style.display = "block";
+        } else {
+          carrot.style.display = "none";
+          broccoli.style.display = "none";
+        }
+  
+        // If no category is checked, show all products
+        if (!checkboxVeg.checked && !checkboxFruits.checked) {
+          apple.style.display = "block";
+          banana.style.display = "block";
+          carrot.style.display = "block";
+          broccoli.style.display = "block";
+        }
+      }
+  
+      // Call toggleCategory function initially to show all products
+      window.onload = function() {
+        toggleCategory(); // Show all cards by default
+      };
+    </script>
+    <script src="./js/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
